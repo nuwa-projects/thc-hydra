@@ -1,5 +1,12 @@
 Changelog for hydra
 -------------------
+keep updating 2022-10-31
+* disable xdesktop-hydra
+* update mongodb.c
+  - fix un-default port
+  - print unauthorized ip
+  - adapt root/userdbadmin roles
+  - -M Parameter optimization
 
 Release 9.5-dev
 * smb2: fix for updated libsmb2 which resulted in correct guessing attempts

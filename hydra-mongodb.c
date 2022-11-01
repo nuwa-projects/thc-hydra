@@ -78,7 +78,7 @@ int32_t start_mongodb(int32_t s, char *ip, int32_t port, unsigned char options, 
     return 3;
 
   mongoc_client_set_appname(client, "hydra");
-  collection = mongoc_client_get_collection(client, miscptr, "test");
+  collection = mongoc_client_get_collection(client, miscptr, "system.users");
   cursor = mongoc_collection_find_with_opts(collection, &q, NULL, NULL);
   r = mongoc_cursor_next(cursor, &doc);
   if (!r) {
@@ -167,7 +167,7 @@ int32_t service_mongodb_init(char *ip, int32_t sp, unsigned char options, char *
 
   if (!require_auth(sock)) {
     hydra_report_found_host(port, ip, "mongodb", fp);
-    hydra_report(stderr, "[ERROR] Mongodb server does not require any authentication\n");
+    hydra_report(stderr, "[unauthorized] Mongodb server does not require any authentication,%s:%d\n", hydra_address2string(ip), port);
     if (sock >= 0)
       sock = hydra_disconnect(sock);
     return -1;
